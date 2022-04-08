@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Base from "./Base";
+import Job from "./Job/Job";
 import Home from "./Home/Home";
 
 ReactDOM.render(
@@ -10,6 +11,7 @@ ReactDOM.render(
     <Base>
       <Routes>
         <Route path="/"  element={<Home/>} />
+        <Route path="/job" element={<Job/>} />
       </Routes>
     </Base>
   </BrowserRouter>,
