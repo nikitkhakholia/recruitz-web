@@ -5,6 +5,7 @@ import "./index.css";
 import Base from "./Base";
 import Job from "./Job/Job";
 import Home from "./Home/Home";
+import Application from "./Application/Application";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/"  element={<Home/>} />
         <Route path="/job" element={<Job/>} />
+        <Route path="/application"  element={<Application/>} />
       </Routes>
     </Base>
   </BrowserRouter>,
