@@ -32,7 +32,7 @@ const Base = ({ children }) => {
               {!isLoggedIn() && (
                 <div className="col-2">
                   <Link
-                    to="/register"
+                    to="/#register"
                     data-bs-toggle="modal"
                     data-bs-target="#registerModal"
                   >

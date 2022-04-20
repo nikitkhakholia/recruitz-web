@@ -13,7 +13,8 @@ ReactDOM.render(
       <Routes>
         <Route path="/"  element={<Home/>} />
         <Route path="/job" element={<Job/>} />
-        <Route path="/application"  element={<Application/>} />
+        <Route path="/activity"  element={<Application/>} />
+        <Route path="*" element={<div className="text-center display-4 p-4"><strong>404!</strong> Page Not Found</div>}/>
       </Routes>
     </Base>
   </BrowserRouter>,
