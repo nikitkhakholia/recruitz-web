@@ -19,3 +19,14 @@ a{
 input{
   font-style: italic;
 }
+#alert-success, #alert-failure{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+}
+.progress{
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
