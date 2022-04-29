@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { getApplicationsForUser } from "./helper";
 
+
+
 const Application = () => {
   const [applications, setApplications] = useState([]);
   // useEffect(() => {
-    
+  console.log(applications)
   // }, []);
   getApplicationsForUser().then((res) => {
+    //console.log(res.data)
     setApplications(res.data.application_mst);
   });
-
   return (
     <div>
       <div class="row text-center mb-5">
