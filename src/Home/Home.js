@@ -1,5 +1,6 @@
 import React from 'react'
-
+const c1 = require("./c1.png")
+const c2 = require("./c2.png")
 const Home=() =>{
   return (
     <div>

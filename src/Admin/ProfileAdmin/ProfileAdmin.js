@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { isLoggedIn } from "../../Login/helper";
 import { showErrorAlert, showSuccessAlert } from "../../utils";
 import { getAllStudents } from "./helper";
 
@@ -22,16 +23,19 @@ const ProfileAdmin = () => {
           <h1 className="display-1">Student Profiles</h1>
         </div>
         <div className="col-2 text-end">
-          <div
+          <a
+          href={"http://localhost:8080/users/"+isLoggedIn().id+"?download=true"}
+          target="_blank"
             className="btn btn-dark mb-2"
             onClick={(e) => {
+
               getAllStudents(true).then((x) => {
                 showSuccessAlert("Downloaded Successfully.");
               });
             }}
           >
             Download Users
-          </div>
+          </a>
         </div>
       </div>
       <table class="table">
