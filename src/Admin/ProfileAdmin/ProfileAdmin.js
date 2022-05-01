@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { isLoggedIn } from "../../Login/helper";
 import { showErrorAlert, showSuccessAlert } from "../../utils";
-import { getAllStudents } from "./helper";
+import { getAllStudents, uploadUsers } from "./helper";
 
 const ProfileAdmin = () => {
   const [students, setstudents] = useState([]);
@@ -18,17 +18,70 @@ const ProfileAdmin = () => {
 
   return (
     <div className="px-4">
-      <div className="row m-0 p-0 justify-content-between align-items-end">
+      <div className="row m-0 p-0 justify-content-between align-items-center">
         <div className="col">
           <h1 className="display-1">Student Profiles</h1>
         </div>
+        <div className="col-2">
+          <div
+            class=" btn btn-dark mb-2"
+            for="userUpload"
+            onClick={(e) => {
+              document.getElementById("userUpload").click();
+            }}
+          >
+            Upload Users
+          </div>
+          <input
+            type="file"
+            class="d-none"
+            id="userUpload"
+            placeholder="Upload Users"
+            onChange={(e) => {
+              if (!e.target.files[0]) {
+                return;
+              }
+              document
+                .getElementsByClassName("progress")[0]
+                .classList.remove("d-none");
+
+              var formData = new FormData();
+              formData.set("file1", e.target.files[0]);
+              uploadUsers(formData).then((res) => {
+                if (res.success && res.success.result) {
+                  var htmlStr =
+                    "<table class='table'><thead><tr><th scope='col'>Login Email</th><th scope=\"col\">Status</th></tr></thead><tbody>";
+                  res.success.result.forEach((x) => {
+                    alert(x);
+                    htmlStr +=
+                      "<tr><th scope='row'>" +
+                      x.user +
+                      "</th><td>" +
+                      x.error +
+                      "</td></tr>";
+                  });
+                  htmlStr += "</tbody></table>";
+                  document.getElementById("uploadResult").innerHTML = htmlStr;
+                  document
+                    .getElementById("resultArea")
+                    .classList.remove("d-none");
+            document.getElementById("userData").classList.add("d-none");
+
+                }
+              });
+            }}
+          />
+        </div>
         <div className="col-2 text-end">
           <a
-          href={"http://localhost:8080/users/"+isLoggedIn().id+"?download=true"}
-          target="_blank"
+            href={
+              "http://localhost:8080/users/" +
+              isLoggedIn().id +
+              "?download=true"
+            }
+            target="_blank"
             className="btn btn-dark mb-2"
             onClick={(e) => {
-
               getAllStudents(true).then((x) => {
                 showSuccessAlert("Downloaded Successfully.");
               });
@@ -38,7 +91,21 @@ const ProfileAdmin = () => {
           </a>
         </div>
       </div>
-      <table class="table">
+      <div className="text-center d-none" id="resultArea">
+        <div id="uploadResult" className="col-6 offset-3"></div>
+        <div
+          className="btn btn-dark"
+          onClick={(e) => {
+            document.getElementById("uploadResult").innerHTML = "";
+            document.getElementById("resultArea").classList.add("d-none");
+            document.getElementById("userData").classList.remove("d-none");
+
+          }}
+        >
+          Clear
+        </div>
+      </div>
+      <table class="table" id="userData">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -79,7 +146,7 @@ const ProfileAdmin = () => {
             })}
         </tbody>
       </table>
-      <ul class="pagination justify-content-center">
+      {/* <ul class="pagination justify-content-center">
         <li class="page-item disabled">
           <a class="page-link">Previous</a>
         </li>
@@ -89,7 +156,7 @@ const ProfileAdmin = () => {
             Next
           </a>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };
