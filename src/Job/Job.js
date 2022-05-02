@@ -1,7 +1,4 @@
-import React from 'react'
-
-export default function Job() {
-  return (
-    <div>recruit Job</div>
-  )
+const Job = ()=>{
+    return <div>123</div>
 }
+export default Job

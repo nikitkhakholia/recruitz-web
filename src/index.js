@@ -9,6 +9,7 @@ import Home from "./Home/Home";
 import Application from "./Application/Application";
 import Profile from "./Profile/Profile";
 import ProfileAdmin from "./Admin/ProfileAdmin/ProfileAdmin";
+import JobAdmin from "./Admin/JobAdmin/JobAdmin";
 
 // ReactDOM.createRoot(document.getElementById("root")).render()
 // ReactDOM.render(<div>Browser Router </div>, root element)
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/activity"  element={<Application/>} />
         <Route path="/profile"  element={<Profile/>} />
         <Route path="/admin/students"  element={<ProfileAdmin/>} />
+        <Route path="/admin/jobs"  element={<JobAdmin/>} />
         <Route path="*" element={<div className="text-center display-4 p-4"><strong>404!</strong> Page Not Found</div>}/>
       </Routes>
     </Base>
