@@ -18,10 +18,10 @@ const Application = () => {
         {/* {JSON.stringify(applications)} */}
         <div class="col">
           <h2>
-            <strong>Activity</strong>
+            <strong>Application</strong>
           </h2>
         </div>
-        <div class="col-3">
+        {/* <div class="col-3">
           <div class="input-group rounded">
             <div class="col-xs-3">
               <input
@@ -36,8 +36,9 @@ const Application = () => {
               <i class="fa fa-search"></i>
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
+      
       <div>
         <table class="table">
           <thead class="table-dark">
