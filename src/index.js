@@ -11,6 +11,7 @@ import Profile from "./Profile/Profile";
 import ProfileAdmin from "./Admin/ProfileAdmin/ProfileAdmin";
 import JobAdmin from "./Admin/JobAdmin/JobAdmin";
 import ApplicationAdmin from "./Admin/ApplicationAdmin/ActivityAdmin";
+import Admin from "./Admin";
 
 // ReactDOM.createRoot(document.getElementById("root")).render()
 // ReactDOM.render(<div>Browser Router </div>, root element)
@@ -22,7 +23,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/jobs" element={<Job/>} />
         <Route path="/activity"  element={<Application/>} />
         <Route path="/profile"  element={<Profile/>} />
-        <Route path="/admin/students"  element={<ProfileAdmin/>} />
+        <Route path="/admin/students"  element={<Admin><ProfileAdmin/></Admin>} />
         <Route path="/admin/jobs"  element={<JobAdmin/>} />
         <Route path="/admin/applications"  element={<ApplicationAdmin/>} />
 

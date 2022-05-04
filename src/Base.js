@@ -9,76 +9,100 @@ const Base = ({ children }) => {
     <div>
       <header className="py-3 text-center">
         {/* <div className="row justify-content-between align-items-center m-0 p-0"> */}
+        <img src="/logo.png" style={{ width: "7rem" }} alt="Logo" />
         <div className="col  display-5" style={{ fontWeight: "bold" }}>
           <Link to="/">Recruitz</Link>
         </div>
-        <div className="col">
-          <div className="row m-2 p-0 justify-content-center align-items-center text-center">
-            {!isLoggedIn() && (
-              <div className="col-1">
-                <Link
-                  to="/#login"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
+        <div className="row m-o p-0 align-items-center">
+          <div
+            className="col-1 btn"
+            onClick={(e) => {
+              window.history.back();
+            }}
+          >
+            <i class="bi bi-chevron-left"></i>
+          </div>
+          <div className="col">
+            <div className="row m-2 p-0 justify-content-center align-items-center text-center">
+              {!isLoggedIn() && (
+                <div className="col-1">
+                  <Link
+                    to="/#login"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                  >
+                    Login
+                  </Link>
+                </div>
+              )}
+              {!isLoggedIn() && (
+                <div className="col-1">
+                  <Link
+                    to="/#register"
+                    data-bs-toggle="modal"
+                    data-bs-target="#registerModal"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
+              {isLoggedIn() && (
+                <div className="col-1">
+                  <Link to="/jobs">Jobs</Link>
+                </div>
+              )}
+              {isLoggedIn() && (
+                <div className="col-1">
+                  <Link to="/activity">Activity</Link>
+                </div>
+              )}
+              {isLoggedIn() && (
+                <div className="col-1">
+                  <Link to="/profile">Profile</Link>
+                </div>
+              )}
+              {isLoggedIn() && (
+                <div className="col-1">
+                  <Link
+                    to="#"
+                    onClick={(e) => {
+                      logOut((data) => {
+                        if (data) {
+                          showSuccessAlert("Logged Out Successfully.");
+                          window.location = "/";
+                        }
+                      });
+                    }}
+                  >
+                    Logout
+                  </Link>
+                </div>
+              )}
+              {isLoggedIn() && isLoggedIn().admin && (
+                <div
+                  id="adminMenuBtn"
+                  class="col-1 btn btn-dark"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#adminMenu"
+                  aria-controls="adminMenu"
                 >
-                  Login
-                </Link>
-              </div>
-            )}
-            {!isLoggedIn() && (
-              <div className="col-1">
-                <Link
-                  to="/#register"
-                  data-bs-toggle="modal"
-                  data-bs-target="#registerModal"
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-            {isLoggedIn() && (
-              <div className="col-1">
-                <Link to="/jobs">Jobs</Link>
-              </div>
-            )}
-            {isLoggedIn() && (
-              <div className="col-1">
-                <Link to="/activity">Activity</Link>
-              </div>
-            )}
-            {isLoggedIn() && (
-              <div className="col-1">
-                <Link to="/profile">Profile</Link>
-              </div>
-            )}
-            {isLoggedIn() && (
-              <div className="col-1">
-                <Link
-                  to="#"
-                  onClick={(e) => {
-                    logOut((data) => {
-                      if (data) {
-                        showSuccessAlert("Logged Out Successfully.");
-                        window.location = "/";
-                      }
-                    });
-                  }}
-                >
-                  Logout
-                </Link>
-              </div>
-            )}
-            {isLoggedIn() && (
-              <div
-                class="col-1 btn btn-dark"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#adminMenu"
-                aria-controls="adminMenu"
-              >
-                Admin
-              </div>
-            )}
+                  Admin
+                </div>
+              )}
+            </div>
+          </div>
+          <div
+            className="col-1 btn"
+            onClick={(e) => {
+              window.history.forward();
+
+              // history.back(); //Go to the previous page
+              // history.forward(); //Go to the next page in the stack
+              // history.go(index); //Where index could be 1, -1, 56, etc.
+            }}
+          >
+            <i class="bi bi-chevron-right"></i>
           </div>
         </div>
         {/* </div> */}
@@ -162,8 +186,8 @@ const Base = ({ children }) => {
             <li class="nav-item">
               <a
                 class={
-                  "nav-link " + (window.location.href.indexOf("admin/students") >
-                  -1)
+                  "nav-link " +
+                  (window.location.href.indexOf("admin/students") > -1)
                     ? "active"
                     : ""
                 }
@@ -179,7 +203,7 @@ const Base = ({ children }) => {
                     ? "active"
                     : ""
                 }
-                href="/admin/jobs"
+                href="#"
               >
                 Jobs
               </a>
@@ -192,7 +216,7 @@ const Base = ({ children }) => {
                   ? "active"
                   : ""
               }
-              href="/admin/applications"
+              href="#"
             >
               Applications
             </a>

@@ -48,152 +48,161 @@ const Profile = () => {
   }, [updated]);
   return (
     <div>
-      <div className="row justify-content-center m-0 p-0">
-        <div className="col-7 text-center">
-          <img
-            className="profile border border-5 border-dark rounded-circle m-2 p-2"
-            src={user.student.photo_url ? user.student.photo_url : userDefault}
-            alt="profile"
-          />
-          {!user.student.photo_url && (
-            <div className="input-group mb-3 ">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Profile Pic Url"
-                onBlur={(e) => {
-                  if (e.target.value.startsWith("http")) {
-                    updateUserData("photo_url", e.target.value).then((res) => {
-                      if (res.success) {
-                        showSuccessAlert("Updated Successfully.");
-                      } else {
-                        showErrorAlert("Some error Occured.");
-                      }
-                    });
-                  }
-                }}
-              />
-            </div>
-          )}
-          <h1 className="mt-4">{user.name}</h1>
-          {/* {user.student.bio && <h5>{user.student.bio}</h5>} */}
-          {
-            <div>
-              <textarea
-                className="h5 text-center w-100 border-0"
-                onBlur={(e) => {
-                  updateUserData("bio", e.target.value).then((res) => {
-                    if (res.success) {
-                      showSuccessAlert("Updated Successfully.");
-                    } else console.log(res.message);
-                  });
-                }}
-                onChange={(e) => {}}
-                defaultValue={user.student.bio}
-                placeholder="Bio"
-              />
-            </div>
-          }
-
-          {/* {user.student.about && <p className="m-4">{user.student.about}</p>} */}
-          {
-            <div>
-              <textarea
-                className="p text-center w-100 border-0"
-                onBlur={(e) => {
-                  updateUserData("about", e.target.value).then((res) => {
-                    if (res.success) {
-                      showSuccessAlert("Updated Successfully.");
-                    } else console.log(res.message);
-                  });
-                }}
-                onChange={(e) => {}}
-                defaultValue={user.student.about}
-                placeholder="About"
-              />
-            </div>
-          }
-
-          <div className="row m-4 p-0 justify-content-center">
-            {user.student.github ? (
-              <div className="col-1">
-                <a href={user.student.github} target="_blank">
-                  <img className="h-100 w-100" src={github} alt="Github_Link" />
-                </a>
-              </div>
-            ) : (
-              <div className="col-3">
-                <textarea
-                  className="p text-center w-100 border-0"
+      {user.student && (
+        <div className="row justify-content-center m-0 p-0">
+          <div className="col-7 text-center">
+            <img
+              className="profile border border-5 border-dark rounded-circle m-2 p-2"
+              src={
+                user.student.photo_url ? user.student.photo_url : userDefault
+              }
+              alt="profile"
+            />
+            {!user.student.photo_url && (
+              <div className="input-group mb-3 ">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Profile Pic Url"
                   onBlur={(e) => {
-                    updateUserData("github", e.target.value).then((res) => {
+                    if (e.target.value.startsWith("http")) {
+                      updateUserData("photo_url", e.target.value).then(
+                        (res) => {
+                          if (res.success) {
+                            showSuccessAlert("Updated Successfully.");
+                          } else {
+                            showErrorAlert("Some error Occured.");
+                          }
+                        }
+                      );
+                    }
+                  }}
+                />
+              </div>
+            )}
+            <h1 className="mt-4">{user.name}</h1>
+            {/* {user.student.bio && <h5>{user.student.bio}</h5>} */}
+            {
+              <div>
+                <textarea
+                  className="h5 text-center w-100 border-0"
+                  onBlur={(e) => {
+                    updateUserData("bio", e.target.value).then((res) => {
                       if (res.success) {
                         showSuccessAlert("Updated Successfully.");
                       } else console.log(res.message);
                     });
                   }}
-                  placeholder="Github"
+                  onChange={(e) => {}}
+                  defaultValue={user.student.bio}
+                  placeholder="Bio"
                 />
               </div>
-            )}
+            }
 
-            {user.student.linkedin ? (
-              <div className="col-1">
-                <a href={user.student.linkedin} target="_blank">
-                  <img
-                    className="h-100 w-100"
-                    src={linkedin}
-                    alt="LinkedIn_Link"
-                  />
-                </a>
-              </div>
-            ) : (
-              <div className="col-3">
+            {/* {user.student.about && <p className="m-4">{user.student.about}</p>} */}
+            {
+              <div>
                 <textarea
                   className="p text-center w-100 border-0"
                   onBlur={(e) => {
-                    updateUserData("linkedin", e.target.value).then((res) => {
+                    updateUserData("about", e.target.value).then((res) => {
                       if (res.success) {
                         showSuccessAlert("Updated Successfully.");
                       } else console.log(res.message);
                     });
                   }}
-                  placeholder="LinkedIn"
+                  onChange={(e) => {}}
+                  defaultValue={user.student.about}
+                  placeholder="About"
                 />
               </div>
-            )}
-            {user.student.phone ? (
-              <div className="col-1">
-                <a href={"tel:" + user.student.phone}>
-                  <img className="h-100 w-100" src={phone} alt="Phone_Link" />
-                </a>
-              </div>
-            ) : (
-              <div className="col-3">
-                <textarea
-                  className="p text-center w-100 border-0"
-                  onBlur={(e) => {
-                    if (e.target.value.length === 10) {
-                      updateUserData("phone", e.target.value).then((res) => {
+            }
+
+            <div className="row m-4 p-0 justify-content-center">
+              {user.student.github ? (
+                <div className="col-1">
+                  <a href={user.student.github} target="_blank">
+                    <img
+                      className="h-100 w-100"
+                      src={github}
+                      alt="Github_Link"
+                    />
+                  </a>
+                </div>
+              ) : (
+                <div className="col-3">
+                  <textarea
+                    className="p text-center w-100 border-0"
+                    onBlur={(e) => {
+                      updateUserData("github", e.target.value).then((res) => {
                         if (res.success) {
                           showSuccessAlert("Updated Successfully.");
                         } else console.log(res.message);
                       });
-                    } else {
-                      showErrorAlert("Enter a valid phone number.");
-                      e.focus();
-                    }
-                  }}
-                  onChange={(e) => {
-                    numberOnly(e);
-                  }}
-                  placeholder="Phone"
-                />
-              </div>
-            )}
-          </div>
+                    }}
+                    placeholder="Github"
+                  />
+                </div>
+              )}
 
-          {/* {user.student.skills && (
+              {user.student.linkedin ? (
+                <div className="col-1">
+                  <a href={user.student.linkedin} target="_blank">
+                    <img
+                      className="h-100 w-100"
+                      src={linkedin}
+                      alt="LinkedIn_Link"
+                    />
+                  </a>
+                </div>
+              ) : (
+                <div className="col-3">
+                  <textarea
+                    className="p text-center w-100 border-0"
+                    onBlur={(e) => {
+                      updateUserData("linkedin", e.target.value).then((res) => {
+                        if (res.success) {
+                          showSuccessAlert("Updated Successfully.");
+                        } else console.log(res.message);
+                      });
+                    }}
+                    placeholder="LinkedIn"
+                  />
+                </div>
+              )}
+              {user.student.phone ? (
+                <div className="col-1">
+                  <a href={"tel:" + user.student.phone}>
+                    <img className="h-100 w-100" src={phone} alt="Phone_Link" />
+                  </a>
+                </div>
+              ) : (
+                <div className="col-3">
+                  <textarea
+                    className="p text-center w-100 border-0"
+                    onBlur={(e) => {
+                      if (e.target.value.length === 10) {
+                        updateUserData("phone", e.target.value).then((res) => {
+                          if (res.success) {
+                            showSuccessAlert("Updated Successfully.");
+                          } else console.log(res.message);
+                        });
+                      } else {
+                        showErrorAlert("Enter a valid phone number.");
+                        e.focus();
+                      }
+                    }}
+                    onChange={(e) => {
+                      numberOnly(e);
+                    }}
+                    placeholder="Phone"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* {user.student.skills && (
             <div className="m-4 card text-start">
               <div className="card-body">
                 <h2 className="card-title">Skills</h2>
@@ -201,161 +210,168 @@ const Profile = () => {
               </div>
             </div>
           )} */}
-          <div className="m-4 card text-start">
-            <div className="card-body">
-              <h2 className="card-title">Skills</h2>
-              <p className="card-text">
-                <textarea
-                  className="p w-100 border-0"
-                  onBlur={(e) => {
-                    updateUserData("skills", e.target.value).then((res) => {
-                      if (res.success) {
-                        showSuccessAlert("Updated Successfully.");
-                      } else console.log(res.message);
-                      e.preventDefault();
-                    });
-                  }}
-                  defaultValue={user.student.skills}
-                  placeholder="Skills"
-                ></textarea>
-              </p>
-            </div>
-          </div>
-
-          <div className="m-4 card text-start">
-            <div className="card-body">
-              <div className="row m-0 m-0">
-                <div className="col m-0 p-0">
-                  <h2 className="card-title">Education</h2>
-                </div>
-                <div className="col-2 m-0 p-0 text-end">
-                  <div
-                    className="btn btn-sm btn-dark"
-                    data-bs-toggle="modal"
-                    data-bs-target="#educationModal"
-                  >
-                    Add New
-                  </div>
-                </div>
-              </div>
-              <p className="card-text">
-                <div className="row justify-content-center">
-                  {user.student.educations && user.student.educations.length > 0
-                    ? user.student.educations.map((edu, i) => {
-                        return (
-                          <div className="col">
-                            <div className="col p-2 m-2 border rounded bg-light">
-                              <h5>{edu.institute_name}</h5>
-                              <p className="m-0">
-                                {edu.degree + ", " + edu.grade + "%"}
-                              </p>
-                              <p className="m-0">{edu.specialization}</p>
-                              <p className="m-0">
-                                {new Date(edu.start_date).toLocaleDateString() +
-                                  " - " +
-                                  new Date(edu.end_date).toLocaleDateString()}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })
-                    : "No courses Added"}
-                </div>
-              </p>
-            </div>
-          </div>
-
-          <div className="m-4 card text-start">
-            <div className="card-body">
-              <div className="row m-0 m-0">
-                <div className="col m-0 p-0">
-                  <h2 className="card-title">Certificates</h2>
-                </div>
-                <div className="col m-0 p-0 text-end">
-                  <div
-                    className="btn btn-sm btn-dark"
-                    data-bs-toggle="modal"
-                    data-bs-target="#certificateModal"
-                    onClick={(e) => {
-                      document.getElementById("certUrl").value = "";
+            <div className="m-4 card text-start">
+              <div className="card-body">
+                <h2 className="card-title">Skills</h2>
+                <p className="card-text">
+                  <textarea
+                    className="p w-100 border-0"
+                    onBlur={(e) => {
+                      updateUserData("skills", e.target.value).then((res) => {
+                        if (res.success) {
+                          showSuccessAlert("Updated Successfully.");
+                        } else console.log(res.message);
+                        e.preventDefault();
+                      });
                     }}
-                  >
-                    Add New
-                  </div>
-                </div>
+                    defaultValue={user.student.skills}
+                    placeholder="Skills"
+                  ></textarea>
+                </p>
               </div>
-              <p className="card-text">
-                <div className="row justify-content-center">
-                  {user.student.certificates &&
-                  user.student.certificates.length > 0
-                    ? user.student.certificates.map((cert, i) => {
-                        return (
-                          <div className="col-6">
-                            {cert.credential_url.endsWith(".pdf") ? (
-                              <embed
-                                className="w-100"
-                                src={cert.credential_url}
-                              ></embed>
-                            ) : (
-                              <img
-                                className="w-100"
-                                src={cert.credential_url}
-                              />
-                            )}
-                          </div>
-                        );
-                      })
-                    : "No certificates Added"}
-                </div>
-              </p>
             </div>
-          </div>
 
-          <div className="m-4 card text-start">
-            <div className="card-body">
-              <div className="row m-0 m-0">
-                <div className="col m-0 p-0">
-                  <h2 className="card-title">Work Experience</h2>
-                </div>
-                <div className="col m-0 p-0 text-end">
-                  <div
-                    className="btn btn-sm btn-dark"
-                    data-bs-toggle="modal"
-                    data-bs-target="#wpModal"
-                  >
-                    Add New
+            <div className="m-4 card text-start">
+              <div className="card-body">
+                <div className="row m-0 m-0">
+                  <div className="col m-0 p-0">
+                    <h2 className="card-title">Education</h2>
+                  </div>
+                  <div className="col-2 m-0 p-0 text-end">
+                    <div
+                      className="btn btn-sm btn-dark"
+                      data-bs-toggle="modal"
+                      data-bs-target="#educationModal"
+                    >
+                      Add New
+                    </div>
                   </div>
                 </div>
-              </div>
-              <p className="card-text">
-                <div className="row justify-content-center">
-                  {user.student.workExperiences &&
-                  user.student.workExperiences.length > 0
-                    ? user.student.workExperiences.map((we, i) => {
-                        return (
-                          <div className="col-12">
-                            <div className="col p-2 m-2 border rounded bg-light">
-                              <h5>{we.company + ", " + we.title}</h5>
-                              <p className="m-0">
-                                {we.location + ", " + we.employment_type}
-                              </p>
-                              <p className="m-0">{we.description}</p>
-                              <p className="m-0">
-                                {new Date(we.start_date).toLocaleDateString() +
-                                  " - " +
-                                  new Date(we.end_date).toLocaleDateString()}
-                              </p>
+                <p className="card-text">
+                  <div className="row justify-content-center">
+                    {user.student.educations &&
+                    user.student.educations.length > 0
+                      ? user.student.educations.map((edu, i) => {
+                          return (
+                            <div className="col">
+                              <div className="col p-2 m-2 border rounded bg-light">
+                                <h5>{edu.institute_name}</h5>
+                                <p className="m-0">
+                                  {edu.degree + ", " + edu.grade + "%"}
+                                </p>
+                                <p className="m-0">{edu.specialization}</p>
+                                <p className="m-0">
+                                  {new Date(
+                                    edu.start_date
+                                  ).toLocaleDateString() +
+                                    " - " +
+                                    new Date(edu.end_date).toLocaleDateString()}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })
-                    : "No experiences Added"}
+                          );
+                        })
+                      : "No courses Added"}
+                  </div>
+                </p>
+              </div>
+            </div>
+
+            <div className="m-4 card text-start">
+              <div className="card-body">
+                <div className="row m-0 m-0">
+                  <div className="col m-0 p-0">
+                    <h2 className="card-title">Certificates</h2>
+                  </div>
+                  <div className="col m-0 p-0 text-end">
+                    <div
+                      className="btn btn-sm btn-dark"
+                      data-bs-toggle="modal"
+                      data-bs-target="#certificateModal"
+                      onClick={(e) => {
+                        document.getElementById("certUrl").value = "";
+                      }}
+                    >
+                      Add New
+                    </div>
+                  </div>
                 </div>
-              </p>
+                <p className="card-text">
+                  <div className="row justify-content-center">
+                    {user.student.certificates &&
+                    user.student.certificates.length > 0
+                      ? user.student.certificates.map((cert, i) => {
+                          return (
+                            <div className="col-6">
+                              {cert.credential_url.endsWith(".pdf") ? (
+                                <embed
+                                  className="w-100"
+                                  src={cert.credential_url}
+                                ></embed>
+                              ) : (
+                                <img
+                                  className="w-100"
+                                  src={cert.credential_url}
+                                />
+                              )}
+                            </div>
+                          );
+                        })
+                      : "No certificates Added"}
+                  </div>
+                </p>
+              </div>
+            </div>
+
+            <div className="m-4 card text-start">
+              <div className="card-body">
+                <div className="row m-0 m-0">
+                  <div className="col m-0 p-0">
+                    <h2 className="card-title">Work Experience</h2>
+                  </div>
+                  <div className="col m-0 p-0 text-end">
+                    <div
+                      className="btn btn-sm btn-dark"
+                      data-bs-toggle="modal"
+                      data-bs-target="#wpModal"
+                    >
+                      Add New
+                    </div>
+                  </div>
+                </div>
+                <p className="card-text">
+                  <div className="row justify-content-center">
+                    {user.student.workExperiences &&
+                    user.student.workExperiences.length > 0
+                      ? user.student.workExperiences.map((we, i) => {
+                          return (
+                            <div className="col-12">
+                              <div className="col p-2 m-2 border rounded bg-light">
+                                <h5>{we.company + ", " + we.title}</h5>
+                                <p className="m-0">
+                                  {we.location + ", " + we.employment_type}
+                                </p>
+                                <p className="m-0">{we.description}</p>
+                                <p className="m-0">
+                                  {new Date(
+                                    we.start_date
+                                  ).toLocaleDateString() +
+                                    " - " +
+                                    new Date(we.end_date).toLocaleDateString()}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })
+                      : "No experiences Added"}
+                  </div>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+      {user.admin && document.getElementById('adminMenuBtn').click()}
       {/* cert Modal */}
       <div
         className="modal fade"

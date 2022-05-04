@@ -81,7 +81,13 @@ const Login = () => {
           if(res.status){
             delete res.status
           logIn(res,(saved)=>{
-            if (saved) window.location="/profile"
+            if (saved && res.student){
+              window.location="/profile"
+            }
+            else if (saved && res.admin){
+              window.location="/profile"
+              window.location.reload()
+            }
           })
           }else{
             showErrorAlert(res.message)
