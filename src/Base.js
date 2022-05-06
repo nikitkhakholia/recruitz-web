@@ -217,7 +217,7 @@ const Base = ({ children }) => {
                   ? "active"
                   : ""
               }
-              href="/admin/application"
+              href="/admin/applications"
             >
               Applications
             </a>
