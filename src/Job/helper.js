@@ -1,15 +1,9 @@
-import { API } from "../env";
-import { isLoggedIn } from "../Login/helper";
+const { API } = require("../env");
 
-export const getJobsForUser = ()=>{
-    const {id}  = isLoggedIn()
-    // const user  = isLoggedIn()
-    // user.id
-    return fetch(API+"job/"+id,{
-        method: "GET"
-    }).then(res=>{
+export const getAllJobs=()=>{
+    return fetch(API+"listJobs").then(res=>{
         return res.json()
-    }).catch(err=>{
-        console.log(err);
+    }).catch(e=>{
+        console.log(e);
     })
 }
