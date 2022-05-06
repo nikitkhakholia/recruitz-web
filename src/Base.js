@@ -204,7 +204,7 @@ const Base = ({ children }) => {
                     ? "active"
                     : ""
                 }
-                href="#"
+                href="/admin/jobs"
               >
                 Jobs
               </a>
@@ -217,7 +217,7 @@ const Base = ({ children }) => {
                   ? "active"
                   : ""
               }
-              href="#"
+              href="/admin/application"
             >
               Applications
             </a>
