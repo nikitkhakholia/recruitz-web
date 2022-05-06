@@ -1,10 +1,31 @@
 import { API } from "../env";
 import { isLoggedIn } from "../Login/helper";
 
-export const loadStudentdata = (id) => {
+export const loadStudentdata = (userId) => {
   document.getElementsByClassName("progress")[0].classList.remove("d-none");
+  const {id, token}=isLoggedIn()
   return fetch(`${API}user/${id}`, {
     method: "GET",
+    headers:{
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then((resp) => {
+      document.getElementsByClassName("progress")[0].classList.add("d-none");
+      return resp.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const loadStudentdata1 = (userId) => {
+  document.getElementsByClassName("progress")[0].classList.remove("d-none");
+  // const {id, token}=isLoggedIn()
+  return fetch(`${API}user1/${userId}`, {
+    method: "GET",
+    // headers:{
+    //   "Authorization": `Bearer ${token}`
+    // }
   })
     .then((resp) => {
       document.getElementsByClassName("progress")[0].classList.add("d-none");
@@ -16,8 +37,12 @@ export const loadStudentdata = (id) => {
 };
 export const updateUserData = (field, data) => {
   document.getElementsByClassName("progress")[0].classList.remove("d-none");
-  return fetch(`${API}user/${isLoggedIn().id}?field=${field}&data=${data}`, {
+  const {id, token}=isLoggedIn()
+  return fetch(`${API}user/${id}?field=${field}&data=${data}`, {
     method: "PUT",
+    headers:{
+      "Authorization": `Bearer ${token}`
+    }
   })
     .then((res) => {
       document.getElementsByClassName("progress")[0].classList.add("d-none");
@@ -30,11 +55,13 @@ export const updateUserData = (field, data) => {
 
 export const addStudentEdu = (data) => {
   document.getElementsByClassName("progress")[0].classList.remove("d-none");
-  return fetch(`${API}user/edu/${isLoggedIn().id}`, {
+  const {id, token}=isLoggedIn()
+  return fetch(`${API}user/edu/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   })
@@ -49,11 +76,13 @@ export const addStudentEdu = (data) => {
 
 export const addStudentCertificate = (data) => {
   document.getElementsByClassName("progress")[0].classList.remove("d-none");
-  return fetch(`${API}user/cer/${isLoggedIn().id}`, {
+  const {id, token}=isLoggedIn()
+  return fetch(`${API}user/cer/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   })
@@ -68,12 +97,13 @@ export const addStudentCertificate = (data) => {
 
 export const addStudentWE = (data) => {
   document.getElementsByClassName("progress")[0].classList.remove("d-none");
-
-  return fetch(`${API}user/workexp/${isLoggedIn().id}`, {
+  const {id, token}=isLoggedIn()
+  return fetch(`${API}user/workexp/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   })

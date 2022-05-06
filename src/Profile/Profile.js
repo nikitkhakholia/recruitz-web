@@ -51,17 +51,22 @@ const Profile = () => {
       {user.student && (
         <div className="row justify-content-center m-0 p-0">
           <div className="col-7 text-center">
+            
             <img
-              className="profile border border-5 border-dark rounded-circle m-2 p-2"
+            onClick={e=>{
+              document.getElementById("photoUrlDiv").classList.remove('d-none')
+            }}
+              className="profile border border-5 border-dark rounded-circle m-2 p-"
               src={
                 user.student.photo_url ? user.student.photo_url : userDefault
               }
               alt="profile"
+              style={{cursor: "pointer", objectFit:"cover"}}
             />
-            {!user.student.photo_url && (
-              <div className="input-group mb-3 ">
+            { (
+              <div className="input-group mb-3 d-none" id="photoUrlDiv">
                 <input
-                  type="text"
+                  type="text "
                   className="form-control"
                   placeholder="Profile Pic Url"
                   onBlur={(e) => {
@@ -70,11 +75,14 @@ const Profile = () => {
                         (res) => {
                           if (res.success) {
                             showSuccessAlert("Updated Successfully.");
+                            e.target.classList.add('d-none')
                           } else {
                             showErrorAlert("Some error Occured.");
                           }
                         }
                       );
+                    }else{
+                      showErrorAlert("Enter valid url.")
                     }
                   }}
                 />

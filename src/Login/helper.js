@@ -92,3 +92,24 @@ export const doLogin = (data) => {
       console.log(err);
     });
 };
+
+export const forgotPassword = (data) => {
+  document.getElementsByClassName("progress")[0].classList.remove("d-none");
+  const {id, token} = isLoggedIn()
+  return fetch(`${API}forgotpassword`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((resp) => {
+      document.getElementsByClassName("progress")[0].classList.add("d-none");
+
+      return resp.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

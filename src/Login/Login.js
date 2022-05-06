@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { showErrorAlert, showSuccessAlert } from "../utils";
-import { checkEmail, createLogin, doLogin, generateOtp, logIn } from "./helper";
+import {
+  checkEmail,
+  createLogin,
+  doLogin,
+  forgotPassword,
+  generateOtp,
+  logIn,
+} from "./helper";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -10,24 +17,25 @@ const Login = () => {
     password: "",
     cPassword: "",
   });
-//emailField
+  //emailField
   const generateOtpJourney = () => {
     if (
       user.email.match("^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") &&
       user.email.endsWith("christuniversity.in")
     ) {
-      var otpMessage = document.getElementById("otpMessage");
+      // var otpMessage = document.getElementById("otpMessage");
       var generateOtpButton = document.getElementById("generateOtpBtn");
 
       generateOtpButton.disabled = true;
-      otpMessage.style.display = "none";
+      // otpMessage.style.display = "none";
 
       checkEmail(user.email).then((res) => {
         if (res.success) {
           generateOtp(user.email).then((res1) => {
             if (res1.success) {
-              otpMessage.innerText = "OTP sent to " + user.email;
-              otpMessage.style.display = "block";
+              // otpMessage.innerText = "OTP sent to " + user.email;
+              // otpMessage.style.display = "block";
+              showSuccessAlert("OTP sent to "+user.email);
             } else {
               console.log(res1.error);
             }
@@ -36,6 +44,11 @@ const Login = () => {
           showErrorAlert(res.error);
           setUser({ ...user, email: "" });
           generateOtpButton.disabled = false;
+          <p
+                  className="mt-1 small"
+                  id="otpMessage"
+                  style={{ display: "none" }}
+                ></p>
         }
       });
     } else {
@@ -44,62 +57,61 @@ const Login = () => {
   };
   const registerJourney = () => {
     // validation
-    if(user.name.length<3){
-      showErrorAlert("Please enter a valid name.")
-        return
+    if (user.name.length < 3) {
+      showErrorAlert("Please enter a valid name.");
+      return;
     }
-    if(!user.email.match("^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")){
-      showErrorAlert("Please enter a valid email.")
-        return
+    if (!user.email.match("^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+      showErrorAlert("Please enter a valid email.");
+      return;
     }
-    if(user.otp.length!==6){
-      showErrorAlert("Please enter a valid OTP.")
-        return
+    if (user.otp.length !== 6) {
+      showErrorAlert("Please enter a valid OTP.");
+      return;
     }
-    if(user.password.length<8){
-      showErrorAlert("Password must be 8 chars long.")
-        return
+    if (user.password.length < 8) {
+      showErrorAlert("Password must be 8 chars long.");
+      return;
     }
-    if(user.password!==user.cPassword){
-      showErrorAlert("Password doesnot match with Confirm Password.")
-        return
+    if (user.password !== user.cPassword) {
+      showErrorAlert("Password doesnot match with Confirm Password.");
+      return;
     }
 
-    createLogin(user).then(res=>{
-        if(!res.status){
-          showErrorAlert(res.message)
-        }else{
-          showSuccessAlert(res.message)
-          document.getElementById("regClose").click()
-        }
-    })
-  };
-  const loginJourney=()=>{
-    if(user.email.match("^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")){
-      if(user.password){
-        doLogin(user).then(res=>{
-          if(res.status){
-            delete res.status
-          logIn(res,(saved)=>{
-            if (saved && res.student){
-              window.location="/profile"
-            }
-            else if (saved && res.admin){
-              window.location="/profile"
-              window.location.reload()
-            }
-          })
-          }else{
-            showErrorAlert(res.message)
-          }
-        })
-      }else{
-        showErrorAlert("Please enter a password.")
+    createLogin(user).then((res) => {
+      if (!res.status) {
+        showErrorAlert(res.message);
+      } else {
+        showSuccessAlert(res.message);
+        document.getElementById("regClose").click();
       }
-    }else{
-      showErrorAlert("Please enter a valid email.")
+    });
+  };
+  const loginJourney = () => {
+    if (user.email.match("^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) {
+      if (user.password) {
+        doLogin(user).then((res) => {
+          if (res.status) {
+            delete res.status;
+            logIn(res, (saved) => {
+              if (saved && res.student) {
+                window.location = "/profile";
+              } else if (saved && res.admin) {
+                window.location = "/profile";
+                window.location.reload();
+              }
+            });
+          } else {
+            showErrorAlert(res.message);
+          }
+        });
+      } else {
+        showErrorAlert("Please enter a password.");
+      }
+    } else {
+      showErrorAlert("Please enter a valid email.");
     }
-  }
+  };
   return (
     <div>
       {/* login modal */}
@@ -117,7 +129,7 @@ const Login = () => {
                 Login
               </h5>
               <button
-              id="loginClose"
+                id="loginClose"
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
@@ -152,14 +164,26 @@ const Login = () => {
               </div>
             </div>
             <div className="modal-footer border-0">
-              {/* <div
+              { user.email.match("^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$") &&
+      user.email.endsWith("christuniversity.in") && <div
                 className="btn"
                 data-bs-toggle="modal"
                 data-bs-target="#resetPasswordModal"
+                onClick={e=>{
+                  generateOtp(user.email).then(res=>{
+                    if(res.success){
+                      showSuccessAlert("Otp sent successfully.")
+                    }
+                  })
+                }}
               >
                 Reset Password
-              </div> */}
-              <button type="button" className="btn btn-dark" onClick={loginJourney}>
+              </div>}
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={loginJourney}
+              >
                 Login
               </button>
             </div>
@@ -182,7 +206,7 @@ const Login = () => {
                 Register
               </h5>
               <button
-              id="regClose"
+                id="regClose"
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
@@ -220,11 +244,11 @@ const Login = () => {
                     Generate OTP
                   </button>
                 </div>
-                <p
+                {/* <p
                   className="mt-1 small"
                   id="otpMessage"
                   style={{ display: "none" }}
-                ></p>
+                ></p> */}
 
                 <div className="input-group mt-3">
                   <input
@@ -264,7 +288,11 @@ const Login = () => {
               </div>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" className="btn btn-dark" onClick={registerJourney}>
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={registerJourney}
+              >
                 Register
               </button>
             </div>
@@ -287,7 +315,7 @@ const Login = () => {
                 Reset Password
               </h5>
               <button
-              id="rpClose"
+                id="rpClose"
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
@@ -343,7 +371,33 @@ const Login = () => {
               </div>
             </div>
             <div className="modal-footer border-0">
-              <button type="button" className="btn btn-dark">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={(e) => {
+                  if (user.otp.length < 6) {
+                    showErrorAlert("Enter valid otp.");
+                    return;
+                  }
+                  if (user.cPassword != user.password) {
+                    showErrorAlert(
+                      "Please make sure that both the passwords are same."
+                    );
+                    return;
+                  }
+                  forgotPassword(user).then((res) => {
+                    if (res.success) {
+                      showSuccessAlert(
+                        "Your password is reset successfully. Kindly login."
+                      );
+                    } else {
+                      showErrorAlert(
+                        "Some error occured. Kindly contact support."
+                      );
+                    }
+                  });
+                }}
+              >
                 Reset Password
               </button>
             </div>

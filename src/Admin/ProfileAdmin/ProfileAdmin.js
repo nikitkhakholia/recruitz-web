@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { API } from "../../env";
 import { isLoggedIn } from "../../Login/helper";
 import { showErrorAlert, showSuccessAlert } from "../../utils";
-import { getAllStudents, uploadUsers } from "./helper";
+import { downloadAllStudents, getAllStudents, uploadUsers } from "./helper";
 
 const ProfileAdmin = () => {
   const [students, setstudents] = useState([]);
@@ -52,7 +53,6 @@ const ProfileAdmin = () => {
                   var htmlStr =
                     "<table class='table'><thead><tr><th scope='col'>Login Email</th><th scope=\"col\">Status</th></tr></thead><tbody>";
                   res.success.result.forEach((x) => {
-                    alert(x);
                     htmlStr +=
                       "<tr><th scope='row'>" +
                       x.user +
@@ -65,15 +65,14 @@ const ProfileAdmin = () => {
                   document
                     .getElementById("resultArea")
                     .classList.remove("d-none");
-            document.getElementById("userData").classList.add("d-none");
-
+                  document.getElementById("userData").classList.add("d-none");
                 }
               });
             }}
           />
         </div>
         <div className="col-2 text-end">
-          <a
+          {/* <a
             href={
               "http://localhost:8000/users/" +
               isLoggedIn().id +
@@ -82,13 +81,45 @@ const ProfileAdmin = () => {
             target="_blank"
             className="btn btn-dark mb-2"
             onClick={(e) => {
-              getAllStudents(true).then((x) => {
+              getAllStudents().then((x) => {
+                showSuccessAlert("Downloaded Successfully.");
+              });
+            }}
+          >
+            Download 
+            href={
+              "http://localhost:8000/users/" +
+              isLoggedIn().id +
+              "?download=true"
+            }
+            target="_blank"
+            className="btn btn-dark mb-2"
+            onClick={(e) => {
+              getAllStudents().then((x) => {
                 showSuccessAlert("Downloaded Successfully.");
               });
             }}
           >
             Download Users
-          </a>
+          </a>Users
+          </a> */}
+          <div className="btn btn-dark mb-2" onClick={e=>{
+            downloadAllStudents()
+          }}>Download</div>
+          {/* <div
+            className="btn btn-dark mb-2"
+            onClick={(e) => {
+              const href = window.URL.createObjectURL(API+"users/"+isLoggedIn().id+"?download=true");
+              const link = document.createElement("a");
+              link.href = href;
+              link.setAttribute("download", "config.xlsx"); //or any other extension
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+          >
+            Download Users
+          </div> */}
         </div>
       </div>
       <div className="text-center d-none" id="resultArea">
@@ -99,7 +130,6 @@ const ProfileAdmin = () => {
             document.getElementById("uploadResult").innerHTML = "";
             document.getElementById("resultArea").classList.add("d-none");
             document.getElementById("userData").classList.remove("d-none");
-
           }}
         >
           Clear
@@ -130,7 +160,18 @@ const ProfileAdmin = () => {
               //   alert(10 + pagination * 10);
               if (i >= pagination * 10 && i < 10 + pagination * 10) {
                 return (
-                  <tr key={i}>
+                  <tr
+                    key={i}
+                    style={{ cursor: "pointer" }}
+                    onClick={(e) => {
+                      const href = "/profile/" + stu[0];
+                      const link = document.createElement("a");
+                      link.href = href;
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                  >
                     <th scope="row">{stu[0]}</th>
                     <td>{stu[1]}</td>
                     <td>{stu[2]}</td>

@@ -13,7 +13,7 @@ const Base = ({ children }) => {
         <div className="col  display-5" style={{ fontWeight: "bold" }}>
           <Link to="/">Recruitz</Link>
         </div>
-        <div className="row m-o p-0 align-items-center">
+        <div className="row m-0 p-0 align-items-center">
           <div
             className="col-1 btn"
             onClick={(e) => {
@@ -46,19 +46,31 @@ const Base = ({ children }) => {
                   </Link>
                 </div>
               )}
-              {isLoggedIn() && (
+              {isLoggedIn() && isLoggedIn().student && (
                 <div className="col-1">
                   <Link to="/jobs">Jobs</Link>
                 </div>
               )}
-              {isLoggedIn() && (
+              {isLoggedIn() && isLoggedIn().student && (
                 <div className="col-1">
                   <Link to="/activity">Activity</Link>
                 </div>
               )}
-              {isLoggedIn() && (
+              {isLoggedIn() && isLoggedIn().student && (
                 <div className="col-1">
                   <Link to="/profile">Profile</Link>
+                </div>
+              )}
+              {isLoggedIn() && isLoggedIn().admin && (
+                <div
+                  id="adminMenuBtn"
+                  class="col-1 btn "
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#adminMenu"
+                  aria-controls="adminMenu"
+                >
+                  Admin
                 </div>
               )}
               {isLoggedIn() && (
@@ -78,18 +90,7 @@ const Base = ({ children }) => {
                   </Link>
                 </div>
               )}
-              {isLoggedIn() && isLoggedIn().admin && (
-                <div
-                  id="adminMenuBtn"
-                  class="col-1 btn btn-dark"
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#adminMenu"
-                  aria-controls="adminMenu"
-                >
-                  Admin
-                </div>
-              )}
+              
             </div>
           </div>
           <div
