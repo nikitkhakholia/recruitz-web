@@ -7,6 +7,9 @@ export const getAllStudents = () => {
 
   return fetch(`${API}users/${id}`, {
     method: "GET",
+    headers:{
+      "Authorization": `Bearer ${token}`
+    }
   })
     .then((resp) => {
       document.getElementsByClassName("progress")[0].classList.add("d-none");
@@ -23,6 +26,9 @@ export const downloadAllStudents = () => {
 
   return fetch(`${API}users/${id}?download=true`, {
     method: "GET",
+    headers:{
+      "Authorization": `Bearer ${token}`
+    }
   })
     .then((res) => res.blob())
     .then((resp) => {
@@ -57,6 +63,8 @@ export const uploadUsers = (data) => {
     headers: {
       Accept: "application/json",
       // "Content-Type": "application/json",
+        "Authorization": `Bearer ${isLoggedIn().token}`
+      
     },
     // body:JSON.stringify(data)
     body: data,
