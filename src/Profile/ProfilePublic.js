@@ -103,7 +103,7 @@ const ProfilePublic = () => {
             </div>
           )}
            
-
+{user.student.educations &&user.student.educations.length>0 && 
             <div className="m-4 card text-start">
               <div className="card-body">
                 <div className="row m-0 m-0">
@@ -118,7 +118,7 @@ const ProfilePublic = () => {
                       ? user.student.educations.map((edu, i) => {
                           return (
                             <div className="col">
-                              <div className="col p-2 m-2 border rounded bg-light">
+                              <div className="col p-2 m-2 border-bottom">
                                 <h5>{edu.institute_name}</h5>
                                 <p className="m-0">
                                   {edu.degree + ", " + edu.grade + "%"}
@@ -139,9 +139,9 @@ const ProfilePublic = () => {
                   </div>
                 </p>
               </div>
-            </div>
+            </div>}
 
-            <div className="m-4 card text-start">
+            {user.student.certificates &&user.student.certificates.length>0 && <div className="m-4 card text-start">
               <div className="card-body">
                 <div className="row m-0 m-0">
                   <div className="col m-0 p-0">
@@ -174,13 +174,13 @@ const ProfilePublic = () => {
                   </div>
                 </p>
               </div>
-            </div>
+            </div>}
 
-            <div className="m-4 card text-start">
+            {user.student.workExperiences &&user.student.workExperiences.length>0 && <div className="m-4 card text-start">
               <div className="card-body">
                 <div className="row m-0 m-0">
                   <div className="col m-0 p-0">
-                    <h2 className="card-title">Work Experience</h2>
+                    <h2 className="card-title">Work Experiences</h2>
                   </div>
                   
                 </div>
@@ -191,7 +191,7 @@ const ProfilePublic = () => {
                       ? user.student.workExperiences.map((we, i) => {
                           return (
                             <div className="col-12">
-                              <div className="col p-2 m-2 border rounded bg-light">
+                              <div className="col p-2 m-2 border-bottom">
                                 <h5>{we.company + ", " + we.title}</h5>
                                 <p className="m-0">
                                   {we.location + ", " + we.employment_type}
@@ -212,7 +212,7 @@ const ProfilePublic = () => {
                   </div>
                 </p>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       )}

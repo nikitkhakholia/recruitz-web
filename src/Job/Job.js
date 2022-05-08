@@ -5,8 +5,9 @@
 
 import { useEffect, useState } from "react"
 import { API } from "../env";
-import { showErrorAlert } from "../utils";
+import { showErrorAlert, showSuccessAlert } from "../utils";
 import { getAllJobs } from "./helper";
+import { addApplication } from "../Application/helper";
 import "./Job.css";
 
 const JobAdmin = () => {
@@ -104,7 +105,15 @@ const JobAdmin = () => {
                     
                     <a href="#" class="card-link">{job.location}</a>
 
-                    <div id="btns"><button class="button"><span>Apply</span></button></div>
+                    <div id="btns"><button class="button" onClick={e=>{
+                      addApplication(job.id).then(res=>{
+                        if(res.success){
+                          showSuccessAlert("Applied Successfully.")
+                        }else{
+                          showErrorAlert("Failed to apply. Please contact suppport.")
+                        }
+                      })
+                    }}><span>Apply</span></button></div>
 
 
                   </div>
