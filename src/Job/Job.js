@@ -92,7 +92,7 @@ const JobAdmin = () => {
                 </div>
               </div>
             })} */}
-
+        {/* {JSON.stringify(jobs)} */}
             
             {jobs.map((job, i) => {
               return <div className="col-4 m-0 p-3">
@@ -101,7 +101,8 @@ const JobAdmin = () => {
                   <div class="card-body">
                     <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">{job.job&&job.job.description}</p>
+
                     
                     <a href="#" class="card-link">{job.location}</a>
 

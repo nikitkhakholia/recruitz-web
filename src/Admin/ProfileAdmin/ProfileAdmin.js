@@ -103,7 +103,7 @@ const ProfileAdmin = () => {
             Download Users
           </a>Users
           </a> */}
-          <div className="btn btn-dark mb-2" onClick={e=>{
+          <div className="btn btn-dark mb-2" onClick={e => {
             downloadAllStudents()
           }}>Download</div>
           {/* <div
@@ -159,29 +159,32 @@ const ProfileAdmin = () => {
               //   alert(pagination * 10);
               //   alert(10 + pagination * 10);
               if (i >= pagination * 10 && i < 10 + pagination * 10) {
+                // stu[1]+"".indexOf('admin')>-1
                 return (
-                  <tr
-                    key={i}
-                    style={{ cursor: "pointer" }}
-                    onClick={(e) => {
-                      const href = "/profile/" + stu[0];
-                      const link = document.createElement("a");
-                      link.href = href;
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    }}
-                  >
-                    <th scope="row">{stu[0]}</th>
-                    <td>{stu[1]}</td>
-                    <td>{stu[2]}</td>
-                    <td>{stu[3]}</td>
-                    <td>{stu[4]}</td>
-                    <td>{stu[5]}</td>
-                    <td>{stu[6]}</td>
-                    <td>{stu[7]}</td>
-                    <td>{stu[8]}</td>
-                  </tr>
+                  true ?
+                    <tr
+                      key={i}
+                      style={{ cursor: "pointer" }}
+                      onClick={(e) => {
+                        const href = "/profile/" + stu[0];
+                        const link = document.createElement("a");
+                        link.href = href;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
+                    >
+                      <th scope="row">{stu[0]}</th>
+                      <td>{stu[1]}</td>
+                      <td>{stu[2]}</td>
+                      <td>{stu[3]}</td>
+                      <td>{stu[4]}</td>
+                      <td>{stu[5]}</td>
+                      <td>{stu[6]}</td>
+                      <td>{stu[7]}</td>
+                      <td>{stu[8]}</td>
+                    </tr>
+                    : null
                 );
               }
             })}
