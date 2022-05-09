@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getApplicationsForUser } from "./helper";
-
+import "./Application.css";
 
 
 const Application = () => {
   const [applications, setApplications] = useState([]);
   // useEffect(() => {
-  console.log(applications)
+  console.log(applications);
   // }, []);
   getApplicationsForUser().then((res) => {
     //console.log(res.data)
@@ -16,30 +16,14 @@ const Application = () => {
     <div>
       <div class="row text-center mb-5">
         {/* {JSON.stringify(applications)} */}
-        <div class="col">
-          <h2>
+        <div class="col p-3">
+          <h1>
             <strong>Application</strong>
-          </h2>
+          </h1>
         </div>
-        {/* <div class="col-3">
-          <div class="input-group rounded">
-            <div class="col-xs-3">
-              <input
-                type="search"
-                class="form-control rounded"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="search-addon"
-              />
-            </div>
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="fa fa-search"></i>
-            </span>
-          </div>
-        </div> */}
       </div>
-      
-      <div>
+
+      {/* <div>
         <table class="table">
           <thead class="table-dark">
             <tr>
@@ -71,7 +55,32 @@ const Application = () => {
             )}
           </tbody>
         </table>
-      </div>
+      </div> */}
+
+      {applications.map((data, index) => {
+        return (
+          
+          <div className="col-7 m-3 p-3 mx-auto" >
+            <div class="card">
+              <div class="card-body ">
+                <h4 class="flex-container card-title ">
+                  <a href="#" class="card-link">
+                    {data.id}{". "}
+                    {data.job.role}
+                  </a>
+                  <div>
+                    <h6 class="card-title ">{data.application.status}</h6>
+                  </div>
+                </h4>
+                <h6 class="card-subtitle mb-2 p-1">{data.job.company}</h6>
+                <h6 class="card-subtitle mb-1 p-1 text-muted">
+                  {data.job.location}
+                </h6>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
