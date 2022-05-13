@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { API } from "../../env";
+import { getAllJobs } from "../../Job/helper";
 import { showErrorAlert } from "../../utils";
-import { getAllJobs } from "./helper";
+import { uploadJobs } from "./helper";
 
 const JobAdmin = ()=>{
     var job = {id:"1", type: 'Full Time',location:"loc", company:"commm", role:"rolll" }
     const [jobs, setJobs]=useState([job, job]);
 
-
+//jobimport
     useEffect(() => {
         getAllJobs().then(res=>{
             if(res.success){
@@ -21,15 +22,14 @@ const JobAdmin = ()=>{
 
     return(
       <div>
-        {/* // */}
 
 
-        {/* <div className="col-2">
+        <div className="col-2">
           <div
             class=" btn btn-dark mb-2"
-            for="userUpload"
+            for="jobUpload"
             onClick={(e) => {
-              document.getElementById("userUpload").click();
+              document.getElementById("jobUpload").click();
             }}
           >
             Upload Job
@@ -71,10 +71,8 @@ const JobAdmin = ()=>{
               });
             }}
           />
-        </div> */}
+        </div>
 
-
-        {/* // */}
 
 
         <div className="row m-0 p-0">

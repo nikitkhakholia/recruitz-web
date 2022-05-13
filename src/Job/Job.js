@@ -9,6 +9,8 @@ import { showErrorAlert, showSuccessAlert } from "../utils";
 import { getAllJobs } from "./helper";
 import { addApplication } from "../Application/helper";
 import "./Job.css";
+import $ from 'jquery';
+
 
 const JobAdmin = () => {
   var job = { id: "1", type: 'Full Time', location: "loc", company: "commm", role: "rolll" }
@@ -92,8 +94,9 @@ const JobAdmin = () => {
                 </div>
               </div>
             })} */}
-        {/* {JSON.stringify(jobs)} */}
-            
+
+            {/* OG card */}
+
             {jobs.map((job, i) => {
               return <div className="col-4 m-0 p-3">
                 <div class="card">
@@ -101,21 +104,35 @@ const JobAdmin = () => {
                   <div class="card-body">
                     <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
-                    <p class="card-text">{job.job&&job.job.description}</p>
+                    <p class="card-text">{job.job && job.job.description}</p>
 
-                    
+
                     <a href="#" class="card-link">{job.location}</a>
 
-                    <div id="btns"><button class="button" onClick={e=>{
-                      addApplication(job.id).then(res=>{
-                        if(res.success){
+                    <div id="btns"><button class="button" onClick={e => {
+                      addApplication(job.id).then(res => {
+                        if (res.success) {
                           showSuccessAlert("Applied Successfully.")
-                        }else{
+                        } else {
                           showErrorAlert("Failed to apply. Please contact suppport.")
                         }
                       })
                     }}><span>Apply</span></button></div>
 
+
+                    {/* read button */}
+                    
+                    <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div>
+
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script>
+                       $(".readmore-btns").on('click',function(){
+                         $(this).parent().toggleClass("showContent")
+                       });
+                    </script>
+
+                    {/* jquery code */}
 
                   </div>
                 </div>

@@ -7,3 +7,4 @@ export const getAllJobs=()=>{
         console.log(e);
     })
 }
+
