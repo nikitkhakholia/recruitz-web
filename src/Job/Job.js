@@ -104,7 +104,7 @@ const JobAdmin = () => {
                   <div class="card-body">
                     <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
-                    <p class="card-text">{job.job && job.job.description}</p>
+                    <p style={{height:"45px"}} class="card-text">{job.job && job.job.description}</p>
 
 
                     <a href="#" class="card-link">{job.location}</a>

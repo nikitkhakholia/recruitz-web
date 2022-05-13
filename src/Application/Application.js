@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getApplicationsForUser } from "./helper";
-import "./Application.css";
+
 
 
 const Application = () => {
