@@ -4,26 +4,23 @@ import { isLoggedIn, logOut } from "./Login/helper";
 import Login from "./Login/Login";
 import { showSuccessAlert } from "./utils";
 
-const Base = ({ children }) => {
+const Base = ({ children, style }) => {
   return (
-    <div>
-      <header className="py-3 text-center">
-        {/* <div className="row justify-content-between align-items-center m-0 p-0"> */}
-        <img src="/logo.png" style={{ width: "7rem" }} alt="Logo" />
-        <div className="col  display-5" style={{ fontWeight: "bold" }}>
-          <Link to="/">Recruitz</Link>
-        </div>
-        <div className="row m-0 p-0 align-items-center">
-          <div
-            className="col-1 btn"
-            onClick={(e) => {
-              window.history.back();
-            }}
-          >
-            <i class="bi bi-chevron-left"></i>
+    <div style={style}>
+      <header className="py-3 ">
+        <div className="row justify-content-between align-items-center m-0 p-0">
+          <div className="col-5">
+            <div className="row justify-content-start align-items-center">
+              <div className="col-2">
+                <img src="/logo.png" style={{ width: "7rem" }} alt="Logo" />
+              </div>
+              <div className="col display-5" style={{ fontWeight: "bold" }}>
+                <Link to="/">Recruitz</Link>
+              </div>
+            </div>
           </div>
           <div className="col">
-            <div className="row m-2 p-0 justify-content-center align-items-center text-center">
+            <div className="row m-2 p-0 justify-content-end align-items-center text-center">
               {!isLoggedIn() && (
                 <div className="col-1">
                   <Link
@@ -90,9 +87,19 @@ const Base = ({ children }) => {
                   </Link>
                 </div>
               )}
-              
             </div>
           </div>
+        </div>
+        <div className="row m-0 p-0 align-items-center justify-content-between">
+          <div
+            className="col-1 btn"
+            onClick={(e) => {
+              window.history.back();
+            }}
+          >
+            <i class="bi bi-chevron-left"></i>
+          </div>
+
           <div
             className="col-1 btn"
             onClick={(e) => {
@@ -106,8 +113,8 @@ const Base = ({ children }) => {
             <i class="bi bi-chevron-right"></i>
           </div>
         </div>
-        {/* </div> */}
       </header>
+
       <div className="" style={{ minHeight: "1000px" }}>
         {children}
       </div>

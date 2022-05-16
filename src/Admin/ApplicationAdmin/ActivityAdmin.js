@@ -38,7 +38,7 @@ const ApplicationAdmin = () => {
               });
             }}
           >
-            Download Users
+            Download Application
           </a>
         </div>
       </div>

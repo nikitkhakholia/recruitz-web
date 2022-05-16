@@ -179,8 +179,9 @@ const ProfileAdmin = () => {
                       <td>{stu[2]}</td>
                       <td>{stu[3]}</td>
                       <td>{stu[4]}</td>
-                      <td>{stu[5]}</td>
-                      <td>{stu[6]}</td>
+                      <td><a href={stu[5]} target="_blank">Link ↗</a></td>
+                      <td><a href={stu[6]} target="_blank">Link ↗</a></td>
+                      {/* <td>{stu[6]}</td> */}
                       <td>{stu[7]}</td>
                       <td>{stu[8]}</td>
                     </tr>

@@ -14,7 +14,6 @@ import ApplicationAdmin from "./Admin/ApplicationAdmin/ActivityAdmin";
 import Admin from "./Admin";
 import LoggedIn from "./LoggedIn";
 import ProfilePublic from "./Profile/ProfilePublic";
-
 // ReactDOM.createRoot(document.getElementById("root")).render()
 // ReactDOM.render(<div>Browser Router </div>, root element)
 createRoot(document.getElementById("root")).render(

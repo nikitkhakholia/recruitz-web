@@ -122,7 +122,7 @@ const JobAdmin = () => {
 
                     {/* read button */}
                     
-                    <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div>
+                    {/* <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div> */}
 
 
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
