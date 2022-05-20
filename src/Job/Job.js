@@ -98,31 +98,85 @@ const JobAdmin = () => {
             {/* OG card */}
 
             {jobs.map((job, i) => {
-              return <div className="col-4 m-0 p-3">
-                <div class="card">
+              return job && job.job && job.job.status && job.job.status == "Active" &&
+                <div className="col-4 m-0 p-3">
+                  <div class="card">
 
-                  <div class="card-body">
-                    <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
-                    <p style={{height:"45px"}} class="card-text">{job.job && job.job.description}</p>
-
-
-                    <a href="#" class="card-link">{job.location}</a>
-
-                    <div id="btns"><button class="button" onClick={e => {
-                      addApplication(job.id).then(res => {
-                        if (res.success) {
-                          showSuccessAlert("Applied Successfully.")
-                        } else {
-                          showErrorAlert("Failed to apply. Please contact suppport.")
-                        }
-                      })
-                    }}><span>Apply</span></button></div>
+                    <div class="card-body">
+                      <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
+                      <p style={{ height: "45px" }} class="card-text">{job.job && job.job.description}</p>
 
 
-                    {/* read button */}
-                    
-                    {/* <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div> */}
+                      <a href="#" class="card-link">{job.location}</a>
+
+                      <div id="btns"><button class="button" onClick={e => {
+                        addApplication(job.id).then(res => {
+                          if (res.success) {
+                            showSuccessAlert("Applied Successfully.")
+                          } else {
+                            showErrorAlert("Failed to apply. Please contact suppport.")
+                          }
+                        })
+                      }}><span>Apply</span></button></div>
+
+                      <div class="readmore-btns">
+
+                        <button class="button">
+                          <div class="dropdown">
+                            <span>Read..</span>
+
+                            <div class="dropdown-content">
+                              <p class="jobDesc">{job.job && job.job.description}</p>
+                            </div>
+                          </div>
+
+                        </button>
+
+                      </div>
+
+                      {/* // */}
+
+
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#jobDescModal"+i}>
+                        Launch demo modal
+                      </button>
+
+                      <div class="modal fade" id={"jobDescModal"+i} tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            {job.job && job.job.description}
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      {/* // */}
+
+
+
+
+
+
+
+
+                      {/* read button */}
+
+                      {/* <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div> */}
+
+                      {/* <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div>
 
 
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -130,13 +184,13 @@ const JobAdmin = () => {
                        $(".readmore-btns").on('click',function(){
                          $(this).parent().toggleClass("showContent")
                        });
-                    </script>
+                    </script> */}
 
-                    {/* jquery code */}
+                      {/* jquery code */}
 
+                    </div>
                   </div>
                 </div>
-              </div>
             })}
 
 
