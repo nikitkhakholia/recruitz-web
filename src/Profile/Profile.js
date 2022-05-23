@@ -14,6 +14,7 @@ const linkedin = require("./linkedin.png");
 const github = require("./github.png");
 const phone = require("./telephone-call.png");
 const userDefault = require("./user.png");
+const email = require("./gmail.png");
 const Profile = () => {
   const [user, setUser] = useState({
     id: null,
@@ -208,6 +209,11 @@ const Profile = () => {
                   />
                 </div>
               )}
+              <div className="col-1">
+                  <a href={"mailto:" + user.email}>
+                    <img className="h-100 w-100" src={email} alt="Email_Link" />
+                  </a>
+                </div>
             </div>
 
             {/* {user.student.skills && (

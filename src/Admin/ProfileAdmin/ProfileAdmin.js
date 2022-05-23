@@ -174,7 +174,7 @@ const ProfileAdmin = () => {
                         document.body.removeChild(link);
                       }}
                     >
-                      <th scope="row">{stu[0]}</th>
+                      <th scope="row"><a href={"mailto:"+stu[0]}>{stu[0]}</a></th>
                       <td>{stu[1]}</td>
                       <td>{stu[2]}</td>
                       <td>{stu[3]}</td>
