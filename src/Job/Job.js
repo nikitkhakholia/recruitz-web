@@ -3,35 +3,35 @@
 // }
 // export default Job
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { API } from "../env";
 import { showErrorAlert, showSuccessAlert } from "../utils";
 import { getAllJobs } from "./helper";
 import { addApplication } from "../Application/helper";
 import "./Job.css";
-import $ from 'jquery';
-
+import $ from "jquery";
 
 const JobAdmin = () => {
-  var job = { id: "1", type: 'Full Time', location: "loc", company: "commm", role: "rolll" }
+  var job = {
+    id: "1",
+    type: "Full Time",
+    location: "loc",
+    company: "commm",
+    role: "rolll",
+  };
   const [jobs, setJobs] = useState([job, job]);
 
-
   useEffect(() => {
-    getAllJobs().then(res => {
+    getAllJobs().then((res) => {
       if (res.success) {
-        setJobs(res.data)
+        setJobs(res.data);
       }
-    })
-
+    });
   }, []);
-
-
 
   return (
     <div className="row m-0 p-0">
       <div className="col">
-
         <table class="table">
           {/* <thead>
             <tr>
@@ -98,19 +98,36 @@ const JobAdmin = () => {
             {/* OG card */}
 
             {jobs.map((job, i) => {
-              return job && job.job && job.job.status && job.job.status == "Active" &&
-                <div className="col-4 m-0 p-3">
-                  <div class="card">
+              return (
+                job &&
+                job.job &&
+                job.job.status &&
+                job.job.status == "Active" && (
+                  <div
+                    className="col-4 m-0 p-3"
+                    data-bs-toggle="modal"
+                    data-bs-target={"#jobDescModal" + i}
+                  >
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h5 class="flex-container card-title">
+                          <div>{job.company}</div>{" "}
+                          <div>
+                            <h6 class="card-title mb-2">{job.type}</h6>{" "}
+                          </div>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                          {job.role}
+                        </h6>
+                        <p style={{ height: "45px" }} class="card-text">
+                          {job.job && job.job.description}
+                        </p>
 
-                    <div class="card-body">
-                      <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
-                      <p style={{ height: "45px" }} class="card-text">{job.job && job.job.description}</p>
+                        <a href="#" class="card-link">
+                          {job.location}
+                        </a>
 
-
-                      <a href="#" class="card-link">{job.location}</a>
-
-                      <div id="btns"><button class="button" onClick={e => {
+                        {/* <div id="btns"><button class="button" onClick={e => {
                         addApplication(job.id).then(res => {
                           if (res.success) {
                             showSuccessAlert("Applied Successfully.")
@@ -118,9 +135,9 @@ const JobAdmin = () => {
                             showErrorAlert("Failed to apply. Please contact suppport.")
                           }
                         })
-                      }}><span>Apply</span></button></div>
+                      }}><span>Apply</span></button></div> */}
 
-                      <div class="readmore-btns">
+                        {/* <div class="readmore-btns">
 
                         <button class="button">
                           <div class="dropdown">
@@ -133,16 +150,13 @@ const JobAdmin = () => {
 
                         </button>
 
-                      </div>
+                      </div> */}
 
-                      {/* // */}
-
-
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#jobDescModal"+i}>
+                        {/* <button type="button" class="btn btn-primary" >
                         Launch demo modal
-                      </button>
+                      </button> */}
 
-                      <div class="modal fade" id={"jobDescModal"+i} tabindex="-1" aria-hidden="true">
+                        {/* <div class="modal fade" id={"jobDescModal"+i} tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -158,71 +172,69 @@ const JobAdmin = () => {
                             </div>
                           </div>
                         </div>
+                      </div> */}
                       </div>
-
-
-
-
-                      {/* // */}
-
-
-
-
-
-
-
-
-                      {/* read button */}
-
-                      {/* <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div> */}
-
-                      {/* <div class="readmore-btns"><button href="javascript:void();" class="button"><span>Read..</span></button></div>
-
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                    <script>
-                       $(".readmore-btns").on('click',function(){
-                         $(this).parent().toggleClass("showContent")
-                       });
-                    </script> */}
-
-                      {/* jquery code */}
-
                     </div>
                   </div>
-                </div>
+                )
+              );
             })}
-
-
-            {/* <div class="flip1-card">
-              <div class="flip1-card-inner">
-
-                <div class="flip1-card-front">
-                  <h5 class="flex-container card-title"><div>{job.company}</div> <div><h6 class="card-title mb-2">{job.type}</h6> </div></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">{job.location}</a>
-                </div>
-
-                <div class="flip1-card-back">
-                  <h1>John Doe</h1>
-                  <p>Architect & Engineer</p>
-                  <p>We love that guy</p>
-                </div>
-
-              </div>
-            </div> */}
-
-
-
-
           </div>
         </div>
       </div>
-    </div>)
-}
+      {jobs.map((job, i) => {
+        return (
+          job &&
+          job.job &&
+          job.job.status &&
+          job.job.status == "Active" && (
+            <div
+              class="modal fade"
+              id={"jobDescModal" + i}
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <div className="col">
+                      <h5 class=" card-title">{job.company}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6>
+                    </div>
+                    {/* <h5 class="flex-container card-title"><div>{job.company}</div></h5> */}
+                    {/* <h6 class="card-subtitle mb-2 text-muted">{job.role}</h6> */}
+                  </div>
+                  <div class="modal-body ">
+                    {job.job && job.job.description}
+                  </div>
+                  <div class="modal-footer border-0">
+                    <div id="btns">
+                      <button
+                        class="button"
+                        onClick={(e) => {
+                          addApplication(job.id).then((res) => {
+                            if (res.success) {
+                              showSuccessAlert("Applied Successfully.");
+                            } else {
+                              showErrorAlert(
+                                "Failed to apply. Please contact suppport."
+                              );
+                            }
+                          });
+                        }}
+                      >
+                        <span>Apply</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        );
+      })}
+    </div>
+  );
+};
 
-export default JobAdmin
-
-
-
+export default JobAdmin;
